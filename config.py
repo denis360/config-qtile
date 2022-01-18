@@ -64,18 +64,27 @@ keys = [
     Key([mod], "space", lazy.spawn("rofi -show drun")),
 
     # Brightness control
-    Key([mod, "shift"], "Up", lazy.spawn("brightnessctl set 10%+")),
-    Key([mod, "shift"], "Down", lazy.spawn("brightnessctl set 10%-")),
+    Key([mod, "shift"], "k", lazy.spawn("brightnessctl set 10%+")),
+    Key([mod, "shift"], "j", lazy.spawn("brightnessctl set 10%-")),
 
     # Volume control
-    Key([mod, "control"], "Up", lazy.spawn("pamixer --increase 5")),
-    Key([mod, "control"], "Down", lazy.spawn("pamixer --decrease 5")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer --increase 5")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5")),
+    Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle-mute")),
+
+    Key([mod, "control"], "k", lazy.spawn("pamixer --increase 5")),
+    Key([mod, "control"], "j", lazy.spawn("pamixer --decrease 5")),
     Key([mod, "control"], "m", lazy.spawn("pamixer --toggle-mute")),
+
+    # Apps shurtcuts
+     Key([mod], "b", lazy.spawn(
+         "google-chrome-stable --force-device-scale-factor=0.9"
+         ))
 ]
 
 # WorkSpaces
 groups = [Group(i) for i in [
-    "term", "net", "dev", "fs", "sql", "media"
+    "", "", "", "", "", ""
     ]] 
 
 for i, group in enumerate(groups):
@@ -107,7 +116,7 @@ layouts = [
 ]
 
 widget_defaults = {
-    'font': 'UbuntuMono Nerd Font Bold',
+    'font': 'mononoki Nerd Font Bold',
     'fontsize': 14,
     'padding': 1,
 }
@@ -118,7 +127,7 @@ def powerline(fg="#000000", bg="#000000"):
             text="",
             background=bg,
             foreground=fg,
-            padding=-3,
+            padding=-4,
             fontsize=33
             )
 
@@ -135,11 +144,12 @@ screens = [
         top=bar.Bar(
             [
                 widget.GroupBox(
-                    fontsize=12,
+                    fontsize=25,
                     inactive=colors["inactive"],
                     active=colors["active"],
                     padding_y=5,
-                    padding_x=10,
+                    padding_x=12,
+                    margin_x=4,
                     rounded=False,
                     background=colors["dark"],
                     foreground=colors["light"],
