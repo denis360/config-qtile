@@ -64,22 +64,20 @@ keys = [
     Key([mod], "space", lazy.spawn("rofi -show drun")),
 
     # Brightness control
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 10%+")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
+    # or use keyboard shortcuts
     Key([mod, "shift"], "k", lazy.spawn("brightnessctl set 10%+")),
     Key([mod, "shift"], "j", lazy.spawn("brightnessctl set 10%-")),
 
     # Volume control
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer --increase 5")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5")),
-    Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle-mute")),
-
+    Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle")),
+    # or use keyboard shortcuts
     Key([mod, "control"], "k", lazy.spawn("pamixer --increase 5")),
     Key([mod, "control"], "j", lazy.spawn("pamixer --decrease 5")),
-    Key([mod, "control"], "m", lazy.spawn("pamixer --toggle-mute")),
-
-    # Apps shurtcuts
-     Key([mod], "b", lazy.spawn(
-         "google-chrome-stable --force-device-scale-factor=0.9"
-         ))
+    Key([mod, "control"], "m", lazy.spawn("pamixer --toggle")),
 ]
 
 # WorkSpaces
@@ -102,11 +100,11 @@ layouts = [
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
+    layout.Max(),
     layout.MonadTall(
         border_focus=colors["color6"],
         border_width=2, 
-        margin=7),
-    layout.Max(),
+        margin=5),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
@@ -155,47 +153,29 @@ screens = [
                     foreground=colors["light"],
                     borderwidth=1,
                     highlight_method="block",
-                    this_current_screen_border=colors["color6"],
+                    this_current_screen_border=colors["color2"],
                     this_screen_border=colors["light"],
                     other_current_screen_border=colors["light"],
                     other_screen_border=colors["light"]
                     ),
                 
-                widget.Spacer(background=colors["dark"]),
-                
-                powerline(colors["color2"], colors["dark"]),
+                widget.WindowName(background=colors["dark"], font="agave NF Bold"),
 
-                powerline(colors["text"], colors["color2"]),
+                powerline(colors["color1"], colors["dark"]),
+                widget.CurrentLayout(background=colors["color1"], foreground=colors["dark"]),
 
-                icon(colors["light"], colors["text"], "盛 "),
-                widget.Backlight(background=colors["text"]),
+                powerline(colors["color6"], colors["color1"]),
+                icon(colors["dark"], colors["color6"], " ", 20),
+                widget.Memory(background=colors["color6"], foreground=colors["dark"], format='{MemUsed:.0f}{mm} '),
 
-                powerline(colors["color7"], colors["text"]),
-                icon(colors["light"], colors["color7"], "Vol:"),
-                widget.Volume(background=colors["color7"], fmt="{} "),
-
-                powerline(colors["color8"], colors["color7"]),
-                widget.CPU(background=colors["color8"], format="CPU: {load_percent}% "),
-
-                powerline(colors["color4"], colors["color8"]),
-                widget.Battery(
-                    background=colors["color4"],
-                    charge_char="",
-                    discharge_char="",
-                    low_foreground=colors["urgent"],
-                    full_char="",
-                    update_interval=1,
-                    unknown_char="",
-                    format="{char} {percent:2.0%}"
-                    ),
-
-                powerline(colors["color5"], colors["color4"]),
-                widget.Memory(background=colors["color5"], format=" Ram:{MemUsed:.0f}{mm} "),
+                powerline(colors["color5"], colors["color6"]),
 
                 powerline(colors["color2"], colors["color5"]),
+                icon(colors["dark"], colors["color2"], " ", 15),
+                widget.Clock(background=colors["color2"], foreground=colors["dark"], format='%a %d, %H:%M '),
 
-                powerline(colors["color1"], colors["color2"]),
-                widget.Clock(background=colors["color1"], format='%d/%m/%Y - %H:%M '),
+                powerline(colors["text"], colors["color2"]),
+                widget.Systray(background=colors["text"]),
                 # widget.QuickExit(),
             ],
             24,
@@ -234,11 +214,3 @@ auto_minimize = True
 
 wmname = "Qtile"
 
-autostart = [
-        "feh --bg-fill ~/Pictures/Fondos/05.jpg",
-        "compton -b -f &"
-        ]
-
-for i in autostart:
-    os.system(i)
- 

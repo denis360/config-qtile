@@ -10,6 +10,18 @@ yay -S nerd-fonts-ubuntu-mono
 pip install psutil
 ```
 
+Descargar las fuente de la barra de tareas
+* [Mononoki NF](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Mononoki.zip)
+* [Agave NF](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip)
+
+Llevar las fuentes a la carpeta de las fuentes
+```bash
+sudo mkdir /usr/share/fonts/mononoki && sudo mkdir /usr/share/fonts/agave
+cd ~/Downloads && sudo mv Mononoki.zip /usr/share/fonts/mononoki && sudo mv Agave.zip /usr/share/fonts/agave
+cd /usr/share/mononoki && unzip Mononoki.zip
+cd /usr/share/agave && unzip Agave.zip && cd
+```
+
 Clona este repositorio y copia el archivo donde se encuentran mis configuraciones
 ```bash
 git clone https://github.com/denis360/config-qtile.git
@@ -24,20 +36,6 @@ sudo pacman -S rofi
 Puedes editar el atajo para abrir el menu en:
 ```python
 key([mod], "space", lazy.spawn("rofi -show drun"))
-```
-
-## Fondo de pantalla y animaciones
-No tendras fondo de pantalla asi que instala feh para tener uno y estar mas tranquilo
-```bash
-sudo pacman -S feh compton
-```
-```python
-autostart = [
-   "feh --bg-fill ~/ruta/al/fondo/de/pantalla",
-   "compton -b -f &"
-
-for i in autostart:
-    os.system(i)
 ```
 
 ## Control del volumen
