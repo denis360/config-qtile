@@ -18,8 +18,8 @@ Llevar las fuentes a la carpeta de las fuentes
 ```bash
 sudo mkdir /usr/share/fonts/mononoki && sudo mkdir /usr/share/fonts/agave
 cd ~/Downloads && sudo mv Mononoki.zip /usr/share/fonts/mononoki && sudo mv Agave.zip /usr/share/fonts/agave
-cd /usr/share/mononoki && unzip Mononoki.zip
-cd /usr/share/agave && unzip Agave.zip && cd
+cd /usr/share/mononoki && sudo unzip Mononoki.zip
+cd /usr/share/agave && sudo unzip Agave.zip && cd
 ```
 
 Clona este repositorio y copia el archivo donde se encuentran mis configuraciones

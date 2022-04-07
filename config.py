@@ -62,6 +62,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd(),
         desc="Spawn a command using a prompt widget"),
     Key([mod], "space", lazy.spawn("rofi -show drun")),
+    Key([mod, "shift"], "space", lazy.spawn("rofi -show run")),
 
     # Brightness control
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 10%+")),
@@ -71,13 +72,13 @@ keys = [
     Key([mod, "shift"], "j", lazy.spawn("brightnessctl set 10%-")),
 
     # Volume control
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer --increase 5")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5")),
-    Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 5%+")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master 5%-")),
+    Key([], "XF86AudioMute", lazy.spawn("amixer sset Master toggle")),
     # or use keyboard shortcuts
-    Key([mod, "control"], "k", lazy.spawn("pamixer --increase 5")),
-    Key([mod, "control"], "j", lazy.spawn("pamixer --decrease 5")),
-    Key([mod, "control"], "m", lazy.spawn("pamixer --toggle")),
+    Key([mod, "control"], "k", lazy.spawn("amixer sset Master 5%+")),
+    Key([mod, "control"], "j", lazy.spawn("amixer sset Master 5%-")),
+    Key([mod, "control"], "m", lazy.spawn("amixer sset Master toggle")),
 ]
 
 # WorkSpaces
@@ -114,8 +115,8 @@ layouts = [
 ]
 
 widget_defaults = {
-    'font': 'mononoki Nerd Font Bold',
-    'fontsize': 14,
+    'font': 'CaskaydiaCove NF Bold',
+    'fontsize': 13,
     'padding': 1,
 }
 extension_defaults = widget_defaults.copy()
@@ -125,8 +126,8 @@ def powerline(fg="#000000", bg="#000000"):
             text="",
             background=bg,
             foreground=fg,
-            padding=-4,
-            fontsize=33
+            padding=-9,
+            fontsize=54
             )
 
 def icon(fg=colors["dark"], bg="#000000", text="?", fsize=13):
@@ -159,23 +160,24 @@ screens = [
                     other_screen_border=colors["light"]
                     ),
                 
-                widget.WindowName(background=colors["dark"], font="agave NF Bold"),
+                widget.WindowName(background=colors["dark"], fontsize=13),
 
-                powerline(colors["color1"], colors["dark"]),
+                powerline(colors["text"], colors["dark"]),
+                widget.Systray(background=colors["text"]),
+
+                powerline(colors["color1"], colors["text"]),
                 widget.CurrentLayout(background=colors["color1"], foreground=colors["dark"]),
 
                 powerline(colors["color6"], colors["color1"]),
-                icon(colors["dark"], colors["color6"], " ", 20),
+                icon(colors["dark"], colors["color6"], "", 20),
                 widget.Memory(background=colors["color6"], foreground=colors["dark"], format='{MemUsed:.0f}{mm} '),
 
                 powerline(colors["color5"], colors["color6"]),
 
                 powerline(colors["color2"], colors["color5"]),
-                icon(colors["dark"], colors["color2"], " ", 15),
-                widget.Clock(background=colors["color2"], foreground=colors["dark"], format='%a %d, %H:%M '),
+                icon(colors["dark"], colors["color2"], "", 20),
+                widget.Clock(background=colors["color2"], foreground=colors["dark"], format='%a %d - %H:%M '),
 
-                powerline(colors["text"], colors["color2"]),
-                widget.Systray(background=colors["text"]),
                 # widget.QuickExit(),
             ],
             24,
