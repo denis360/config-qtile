@@ -23,7 +23,7 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    
+
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(),
@@ -68,8 +68,8 @@ keys = [
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 10%+")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
     # or use keyboard shortcuts
-    Key([mod, "shift"], "k", lazy.spawn("brightnessctl set 10%+")),
-    Key([mod, "shift"], "j", lazy.spawn("brightnessctl set 10%-")),
+    Key([mod, "shift"], "u", lazy.spawn("brightnessctl set 10%+")),
+    Key([mod, "shift"], "i", lazy.spawn("brightnessctl set 10%-")),
 
     # Volume control
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 5%+")),
@@ -79,12 +79,14 @@ keys = [
     Key([mod, "control"], "k", lazy.spawn("amixer sset Master 5%+")),
     Key([mod, "control"], "j", lazy.spawn("amixer sset Master 5%-")),
     Key([mod, "control"], "m", lazy.spawn("amixer sset Master toggle")),
+
+    Key([mod], "b", lazy.spawn("google-chrome-stable --force-device-scale-factor=0.9")),
 ]
 
 # WorkSpaces
 groups = [Group(i) for i in [
     "", "", "", "", "", ""
-    ]] 
+]]
 
 for i, group in enumerate(groups):
     actual_key = str(i + 1)
@@ -96,21 +98,26 @@ for i, group in enumerate(groups):
     ])
 
 layouts = [
+    layout.Max(),
+    layout.MonadTall(
+        border_focus=colors["color6"],
+        border_width=2,
+        margin=5
+        ),
+    layout.MonadWide(
+        border_focus=colors["color6"],
+        border_width=2,
+        margin=5
+        ),
+    # layout.VerticalTile(),
     # layout.Columns(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    layout.Max(),
-    layout.MonadTall(
-        border_focus=colors["color6"],
-        border_width=2, 
-        margin=5),
-    # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
-    # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
 
@@ -154,33 +161,34 @@ screens = [
                     foreground=colors["light"],
                     borderwidth=1,
                     highlight_method="block",
-                    this_current_screen_border=colors["color2"],
+                    this_current_screen_border=colors["color6"],
                     this_screen_border=colors["light"],
                     other_current_screen_border=colors["light"],
                     other_screen_border=colors["light"]
                     ),
-                
-                widget.WindowName(background=colors["dark"], fontsize=13),
+
+                widget.Spacer(background=colors["dark"]),
 
                 powerline(colors["text"], colors["dark"]),
-                widget.Systray(background=colors["text"]),
+                widget.CurrentLayoutIcon(background=colors["text"], scale=0.60),
+                widget.CurrentLayout(background=colors["text"]),
 
-                powerline(colors["color1"], colors["text"]),
-                widget.CurrentLayout(background=colors["color1"], foreground=colors["dark"]),
-
-                powerline(colors["color6"], colors["color1"]),
+                powerline(colors["color6"], colors["text"]),
                 icon(colors["dark"], colors["color6"], "", 20),
                 widget.Memory(background=colors["color6"], foreground=colors["dark"], format='{MemUsed:.0f}{mm} '),
 
-                powerline(colors["color5"], colors["color6"]),
+                powerline(colors["dark"], colors["color6"]),
 
-                powerline(colors["color2"], colors["color5"]),
-                icon(colors["dark"], colors["color2"], "", 20),
-                widget.Clock(background=colors["color2"], foreground=colors["dark"], format='%a %d - %H:%M '),
+                powerline(colors["text"], colors["dark"]),
+                icon("#F9F9F1", colors["text"], "", 20),
+                widget.Clock(background=colors["text"], format='%a %d, %H:%M '),
+
+                powerline(colors["dark"], colors["text"]),
+                widget.Systray(background=colors["dark"]),
 
                 # widget.QuickExit(),
             ],
-            24,
+            23,
         ),
     ),
 ]

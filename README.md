@@ -5,7 +5,7 @@ _Estas intrucciones te permitiran tener esta configuracion funcionando en tu dis
 
 Primero lo primero instala Qtile y dependencias
 ```bash
-sudo pacman -S qtile pacman-contrib
+sudo pacman -S qtile pacman-contrib nm-applet cbatticon volumeicon
 yay -S nerd-fonts-ubuntu-mono
 pip install psutil
 ```
@@ -17,9 +17,12 @@ Descargar las fuente de la barra de tareas
 Llevar las fuentes a la carpeta de las fuentes
 ```bash
 sudo mkdir /usr/share/fonts/mononoki && sudo mkdir /usr/share/fonts/agave
+
 cd ~/Downloads && sudo mv Mononoki.zip /usr/share/fonts/mononoki && sudo mv Agave.zip /usr/share/fonts/agave
-cd /usr/share/mononoki && sudo unzip Mononoki.zip
-cd /usr/share/agave && sudo unzip Agave.zip && cd
+
+cd /usr/share/fonts/mononoki && sudo unzip Mononoki.zip
+
+cd /usr/share/fonts/agave && sudo unzip Agave.zip && cd
 ```
 
 Clona este repositorio y copia el archivo donde se encuentran mis configuraciones
@@ -39,8 +42,8 @@ key([mod], "space", lazy.spawn("rofi -show drun"))
 ```
 
 ## Control del volumen
-```
-sudo pacman -S pamixer
+```bash
+sudo pacman -S pamixer alsa-tools alsa-utils
 ```
 Puedes editar la configuracion en:
 ```python
@@ -56,7 +59,7 @@ sudo pacman -S brightnessctl
 ```
 Puedes cambiar la configuracion en:
 ```python
-key([mod, "shift"], "Up", lazy.spawn("brightnessctl set +10%")),
-key([mod, "shift"], "Down", lazy.spawn("brightnessctl set -10%")),
+Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 10%+")),
+Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
 ```
 
