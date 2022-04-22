@@ -4,8 +4,6 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-import os
-
 import json
 from os import path
 
@@ -59,10 +57,7 @@ keys = [
 
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(),
-        desc="Spawn a command using a prompt widget"),
-    Key([mod], "space", lazy.spawn("rofi -show drun")),
-    Key([mod, "shift"], "space", lazy.spawn("rofi -show run")),
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 
     # Brightness control
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 10%+")),
@@ -80,12 +75,18 @@ keys = [
     Key([mod, "control"], "j", lazy.spawn("amixer sset Master 5%-")),
     Key([mod, "control"], "m", lazy.spawn("amixer sset Master toggle")),
 
+    # App shortcuts
     Key([mod], "b", lazy.spawn("google-chrome-stable --force-device-scale-factor=0.9")),
+    # Screenshots
+    Key([mod], "s", lazy.spawn("scrot Screenshot_%Y-%m-%d_%H-%M-%S.png --pointer -d 2 -e 'mv $f ~/Pictures/'")),
+    Key([mod, "shift"], "s", lazy.spawn("scrot Screenshot_%Y-%m-%d_%H-%M-%S.png -s -d 2 -e 'mv $f ~/Pictures/'")),
+    Key([mod], "space", lazy.spawn("rofi -show drun")),
+    Key([mod, "shift"], "space", lazy.spawn("rofi -show run")),
 ]
 
 # WorkSpaces
 groups = [Group(i) for i in [
-    "", "", "", "", "", ""
+    "", "", "", "", "", "", "", "", ""
 ]]
 
 for i, group in enumerate(groups):
@@ -100,12 +101,12 @@ for i, group in enumerate(groups):
 layouts = [
     layout.Max(),
     layout.MonadTall(
-        border_focus=colors["color6"],
+        border_focus=colors["color2"],
         border_width=2,
         margin=5
         ),
     layout.MonadWide(
-        border_focus=colors["color6"],
+        border_focus=colors["color2"],
         border_width=2,
         margin=5
         ),
@@ -128,6 +129,8 @@ widget_defaults = {
 }
 extension_defaults = widget_defaults.copy()
 
+
+
 def powerline(fg="#000000", bg="#000000"):
     return widget.TextBox(
             text="",
@@ -145,6 +148,8 @@ def icon(fg=colors["dark"], bg="#000000", text="?", fsize=13):
             fontsize=fsize
             )
 
+
+
 screens = [
     Screen(
         top=bar.Bar(
@@ -161,32 +166,30 @@ screens = [
                     foreground=colors["light"],
                     borderwidth=1,
                     highlight_method="block",
-                    this_current_screen_border=colors["color6"],
+                    this_current_screen_border=colors["color3"],
                     this_screen_border=colors["light"],
                     other_current_screen_border=colors["light"],
                     other_screen_border=colors["light"]
                     ),
 
-                widget.Spacer(background=colors["dark"]),
+                widget.WindowName(background=colors["dark"]),
 
-                powerline(colors["text"], colors["dark"]),
-                widget.CurrentLayoutIcon(background=colors["text"], scale=0.60),
-                widget.CurrentLayout(background=colors["text"]),
+                powerline(colors["color3"], colors["dark"]),
+                widget.CurrentLayoutIcon(background=colors["color3"], scale=0.60),
+                widget.CurrentLayout(background=colors["color3"],foreground=colors["text"]),
 
-                powerline(colors["color6"], colors["text"]),
-                icon(colors["dark"], colors["color6"], "", 20),
-                widget.Memory(background=colors["color6"], foreground=colors["dark"], format='{MemUsed:.0f}{mm} '),
+                powerline(colors["color2"], colors["color3"]),
+                icon(colors["text"], colors["color2"], "", 20),
+                widget.Memory(background=colors["color2"], foreground=colors["text"], format='{MemUsed:.0f}{mm} '),
 
-                powerline(colors["dark"], colors["color6"]),
+                powerline(colors["color4"], colors["color2"]),
+                icon(colors["text"], colors["color4"], "", 20),
+                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%h %d'),
+                icon(colors["text"], colors["color4"], " ", 20),
+                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%H:%M %p '),
 
-                powerline(colors["text"], colors["dark"]),
-                icon("#F9F9F1", colors["text"], "", 20),
-                widget.Clock(background=colors["text"], format='%a %d, %H:%M '),
-
-                powerline(colors["dark"], colors["text"]),
-                widget.Systray(background=colors["dark"]),
-
-                # widget.QuickExit(),
+                powerline(colors["color1"], colors["color4"]),
+                widget.Systray(background=colors["color1"]),
             ],
             23,
         ),
