@@ -27,9 +27,7 @@ cd /usr/share/fonts/agave && sudo unzip Agave.zip && cd
 
 Clona este repositorio y copia el archivo donde se encuentran mis configuraciones
 ```bash
-git clone https://github.com/denis360/config-qtile.git
-cp -r config-qtile/config.py ~/.config/qtile
-cp -r config-qtile/theme.json ~/.config/qtile
+git clone https://github.com/denis360/config-qtile.git ~/.config/qtile
 ```
 
 Instala un menu como dmenu o rofi
