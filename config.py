@@ -9,7 +9,10 @@ from os import path
 
 qtile_path = path.join(path.expanduser('~'), ".config", "qtile")
 
-with open(path.join(qtile_path, "theme.json")) as f:
+with open(path.join(qtile_path, "config-theme.json"), "r") as t:
+    theme = json.load(t)["theme"]
+
+with open(path.join(qtile_path, "themes", f"{theme}.json")) as f:
     colors = json.load(f)
 
 mod = "mod4"
@@ -80,8 +83,8 @@ keys = [
     # Screenshots
     Key([mod], "s", lazy.spawn("scrot Screenshot_%Y-%m-%d_%H-%M-%S.png --pointer -d 2 -e 'mv $f ~/Pictures/'")),
     Key([mod, "shift"], "s", lazy.spawn("scrot Screenshot_%Y-%m-%d_%H-%M-%S.png -s -d 2 -e 'mv $f ~/Pictures/'")),
-    Key([mod], "space", lazy.spawn("rofi -show drun")),
-    Key([mod, "shift"], "space", lazy.spawn("rofi -show run")),
+    Key([mod], "space", lazy.spawn("dmenu_run")),
+    Key([mod, "shift"], "space", lazy.spawn("dmenu_run")),
 ]
 
 # WorkSpaces
@@ -136,8 +139,8 @@ def powerline(fg="#000000", bg="#000000"):
             text="",
             background=bg,
             foreground=fg,
-            padding=-9,
-            fontsize=54
+            padding=-5,
+            fontsize=40
             )
 
 def icon(fg=colors["dark"], bg="#000000", text="?", fsize=13):
@@ -166,13 +169,13 @@ screens = [
                     foreground=colors["light"],
                     borderwidth=1,
                     highlight_method="block",
-                    this_current_screen_border=colors["color3"],
-                    this_screen_border=colors["light"],
-                    other_current_screen_border=colors["light"],
-                    other_screen_border=colors["light"]
+                    this_current_screen_border=colors["color2"],
+                    this_screen_border=colors["grey"],
+                    other_current_screen_border=colors["color3"],
+                    other_screen_border=colors["grey"]
                     ),
 
-                widget.WindowName(background=colors["dark"]),
+                widget.Spacer(background=colors["dark"]),
 
                 powerline(colors["color3"], colors["dark"]),
                 widget.CurrentLayoutIcon(background=colors["color3"], scale=0.60),
@@ -188,12 +191,45 @@ screens = [
                 icon(colors["text"], colors["color4"], " ", 20),
                 widget.Clock(background=colors["color4"], foreground=colors["text"], format='%H:%M %p '),
 
-                powerline(colors["color1"], colors["color4"]),
-                widget.Systray(background=colors["color1"]),
+                powerline(colors["dark"], colors["color4"]),
+                widget.Systray(background=colors["dark"]),
+                icon(colors["dark"], colors["dark"], " ", 20),
             ],
-            23,
+            23, opacity=0.93
         ),
     ),
+    Screen(
+        top=bar.Bar(
+            [
+                widget.GroupBox(
+                    fontsize=25,
+                    inactive=colors["inactive"],
+                    active=colors["active"],
+                    padding_y=5,
+                    padding_x=12,
+                    margin_x=4,
+                    rounded=False,
+                    background=colors["dark"],
+                    foreground=colors["light"],
+                    borderwidth=1,
+                    highlight_method="block",
+                    this_current_screen_border=colors["color2"],
+                    this_screen_border=colors["grey"],
+                    other_current_screen_border=colors["color3"],
+                    other_screen_border=colors["grey"]
+                    ),
+
+                widget.Spacer(background=colors["dark"]),
+
+                powerline(colors["color4"], colors["dark"]),
+                icon(colors["text"], colors["color4"], "", 20),
+                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%h %d'),
+                icon(colors["text"], colors["color4"], " ", 20),
+                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%H:%M %p   '),
+            ],
+            23, opacity=0.93
+        )
+    )
 ]
 
 # Drag floating layouts.
