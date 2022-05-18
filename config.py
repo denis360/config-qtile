@@ -66,16 +66,16 @@ keys = [
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 10%+")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
     # or use keyboard shortcuts
-    Key([mod, "shift"], "u", lazy.spawn("brightnessctl set 10%+")),
-    Key([mod, "shift"], "i", lazy.spawn("brightnessctl set 10%-")),
+    Key([mod, "shift"], "Up", lazy.spawn("brightnessctl set 10%+")),
+    Key([mod, "shift"], "Down", lazy.spawn("brightnessctl set 10%-")),
 
     # Volume control
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 5%+")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master 5%-")),
     Key([], "XF86AudioMute", lazy.spawn("amixer sset Master toggle")),
     # or use keyboard shortcuts
-    Key([mod, "control"], "k", lazy.spawn("amixer sset Master 5%+")),
-    Key([mod, "control"], "j", lazy.spawn("amixer sset Master 5%-")),
+    Key([mod, "control"], "Up", lazy.spawn("amixer sset Master 5%+")),
+    Key([mod, "control"], "Down", lazy.spawn("amixer sset Master 5%-")),
     Key([mod, "control"], "m", lazy.spawn("amixer sset Master toggle")),
 
     # App shortcuts
