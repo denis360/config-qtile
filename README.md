@@ -12,20 +12,17 @@ pip install psutil
 
 Descargar las fuente de la barra de tareas
 * [Mononoki NF](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Mononoki.zip)
-* [Agave NF](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip)
+* [Caskaydia NF](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip)
 
 Llevar las fuentes a la carpeta de las fuentes
 ```bash
-sudo mkdir /usr/share/fonts/mononoki && sudo mkdir /usr/share/fonts/agave
-
-cd ~/Downloads && sudo mv Mononoki.zip /usr/share/fonts/mononoki && sudo mv Agave.zip /usr/share/fonts/agave
-
+sudo mkdir /usr/share/fonts/mononoki && sudo mkdir /usr/share/fonts/caskaydia
+cd ~/Downloads && sudo mv Mononoki.zip /usr/share/fonts/mononoki && sudo mv CascadiaCode.zip /usr/share/fonts/caskaydia
 cd /usr/share/fonts/mononoki && sudo unzip Mononoki.zip
-
-cd /usr/share/fonts/agave && sudo unzip Agave.zip && cd
+cd /usr/share/fonts/caskaydia && sudo unzip CascadiaCode.zip && cd
 ```
 
-Clona este repositorio y copia el archivo donde se encuentran mis configuraciones
+Clona este repositorio y copia el archivo donde se encuentran estas configuraciones
 ```bash
 git clone https://github.com/denis360/config-qtile.git ~/.config/qtile
 ```

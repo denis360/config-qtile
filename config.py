@@ -187,9 +187,9 @@ screens = [
 
                 powerline(colors["color4"], colors["color2"]),
                 icon(colors["text"], colors["color4"], "", 20),
-                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%h %d'),
+                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%d/%m'),
                 icon(colors["text"], colors["color4"], " ", 20),
-                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%H:%M %p '),
+                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%H:%M '),
 
                 powerline(colors["dark"], colors["color4"]),
                 widget.Systray(background=colors["dark"]),
@@ -223,9 +223,9 @@ screens = [
 
                 powerline(colors["color4"], colors["dark"]),
                 icon(colors["text"], colors["color4"], "", 20),
-                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%h %d'),
+                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%d/%m'),
                 icon(colors["text"], colors["color4"], " ", 20),
-                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%H:%M %p   '),
+                widget.Clock(background=colors["color4"], foreground=colors["text"], format='%H:%M   '),
             ],
             23, opacity=0.93
         )
