@@ -81,8 +81,8 @@ keys = [
     # App shortcuts
     Key([mod], "b", lazy.spawn("google-chrome-stable --force-device-scale-factor=0.9")),
     # Screenshots
-    Key([mod], "s", lazy.spawn("scrot Screenshot_%Y-%m-%d_%H-%M-%S.png --pointer -d 2 -e 'mv $f ~/Pictures/'")),
-    Key([mod, "shift"], "s", lazy.spawn("scrot Screenshot_%Y-%m-%d_%H-%M-%S.png -s -d 2 -e 'mv $f ~/Pictures/'")),
+    Key([mod], "s", lazy.spawn("scrot Screenshot_%Y-%m-%d_%H-%M-%S.png --pointer -d 2 -e 'mv $f ~/Pictures/screenshots'")),
+    Key([mod, "shift"], "s", lazy.spawn("scrot Screenshot_%Y-%m-%d_%H-%M-%S.png -s -d 2 -e 'mv $f ~/Pictures/screenshots'")),
     Key([mod], "space", lazy.spawn("dmenu_run")),
     Key([mod, "shift"], "space", lazy.spawn("dmenu_run")),
 ]
@@ -193,7 +193,7 @@ screens = [
 
                 powerline(colors["dark"], colors["color4"]),
                 widget.Systray(background=colors["dark"]),
-                icon(colors["dark"], colors["dark"], " ", 20),
+                icon(colors["dark"], colors["dark"], " ", 7),
             ],
             23, opacity=0.93
         ),
