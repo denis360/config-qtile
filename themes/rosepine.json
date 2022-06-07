@@ -4,24 +4,20 @@
         "#1f1d29"
     ],
     "grey": [
-        "#434758",
-        "#434758"
+        "#ABB2BF",
+        "#ABB2BF"
     ],
     "light": [
         "#ffffff",
         "#ffffff"
     ],
     "text": [
-        "#292d3e",
-        "#292d3e"
+        "#1f1d29",
+        "#1f1d29"
     ],
     "focus": [
-        "#A77AC4",
-        "#A77AC4"
-    ],
-    "urgent": [
-        "#ff5555",
-        "#ff5555"
+        "#eabbb9",
+        "#eabbb9"
     ],
     "active": [
         "#f1ffff",
@@ -31,20 +27,24 @@
         "#4c566a",
         "#4c566a"
     ],
+    "urgent": [
+        "#ea6f91",
+        "#ea6f91"
+    ],
     "color1": [
-        "#1e2127",
-        "#1e2127"
+        "#eabbb9",
+        "#eabbb9"
     ],
     "color2": [
-        "#A77AC4",
-        "#A77AC4"
+        "#f1ca93",
+        "#f1ca93"
     ],
     "color3": [
-        "#7197E7",
-        "#7197E7"
+        "#9bced7",
+        "#9bced7"
     ],
     "color4": [
-        "#E06C75",
-        "#E06C75"
+        "#ea6f91",
+        "#ea6f91"
     ]
 }
